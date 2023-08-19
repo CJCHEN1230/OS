@@ -106,6 +106,9 @@ bool
 AddrSpace::Load(char *fileName) 
 {
     OpenFile *executable = kernel->fileSystem->Open(fileName);
+
+    printf("\nThis is loading file:%s!!!\n",fileName);
+
     NoffHeader noffH;
     unsigned int size;
 
