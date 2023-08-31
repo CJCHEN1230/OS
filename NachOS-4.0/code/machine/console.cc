@@ -11,6 +11,7 @@
 // Copyright (c) 1992-1996 The Regents of the University of California.
 // All rights reserved.  See copyright.h for copyright notice and limitation 
 // of liability and disclaimer of warranty provisions.
+//這個類別模擬螢幕行為，都有繼承虛擬類別CallBackObj，所以都需要實作自己的CallBack()
 
 #include "copyright.h"
 #include "console.h"
@@ -166,9 +167,9 @@ ConsoleOutput::CallBack()
 
 void
 ConsoleOutput::PutChar(char ch)
-{
+{    
     ASSERT(putBusy == FALSE);
-    WriteFile(writeFileNo, &ch, sizeof(char));
+    WriteFile(writeFileNo, &ch, sizeof(char));//ConsoleOutput從在建構子就創造了一個檔案，該檔案的FID為writeFileNo，這邊就是寫入字元到該檔案
     putBusy = TRUE;
-    kernel->interrupt->Schedule(this, ConsoleTime, ConsoleWriteInt);
+    kernel->interrupt->Schedule(this, ConsoleTime, ConsoleWriteInt);//這邊就是模仿硬體螢幕，註冊一個interrupt到os的interrupt清單
 }

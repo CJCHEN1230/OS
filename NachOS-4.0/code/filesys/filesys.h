@@ -65,16 +65,29 @@ class FileSystem {
 
   
 //  The OpenAFile function is used for kernel open system call
-/*  OpenFileId OpenAFile(char *name) {
+// 以下為主要HW1實作的部分
+    OpenFileId OpenF(char *name) 
+	{
+        int fileDescriptor = OpenForReadWrite(name, FALSE);
+        return fileDescriptor;
     }
-    int WriteFile(char *buffer, int size, OpenFileId id){
+    int WriteF(char *buffer, int size, OpenFileId id)
+    {
+        WriteFile(id, buffer, size);//這裡的WriteFile sysdep.cc裡的，理論上引數順序不同，應該不會有衝突
+        return size;
     }
-    int ReadFile(char *buffer, int size, OpenFileId id){
+    
+        
+int ReadF(char *buffer, int size, OpenFileId id){
+      Read(id, buffer, size);
+      return size;
     }
-    int CloseFile(OpenFileId id){
-    }
-*/
+    
 
+    int CloseF(OpenFileId id){
+        int ret = Close(id);
+        return ret >= 0 ? 1: -1;
+    }
 
     bool Remove(char *name) { return Unlink(name) == 0; }
 

@@ -108,11 +108,13 @@ LD = $(GCCDIR)ld
 INCDIR =-I../userprog -I../lib
 CFLAGS = -G 0 -c $(INCDIR) -B../../../usr/local/nachos/lib/gcc-lib/decstation-ultrix/2.95.2/ -B../../../usr/local/nachos/decstation-ultrix/bin/
 
+
 ifeq ($(hosttype),unknown)
 PROGRAMS = unknownhost
 else
 # change this if you create a new test program!
-PROGRAMS = add halt shell matmult sort segments
+#PROGRAMS = add halt shell matmult sort segments test1 test2 a
+PROGRAMS = test1 add halt createFile fileIO_test1 fileIO_test2 
 endif
 
 all: $(PROGRAMS)
@@ -156,6 +158,49 @@ matmult.o: matmult.c
 matmult: matmult.o start.o
 	$(LD) $(LDFLAGS) start.o matmult.o -o matmult.coff
 	$(COFF2NOFF) matmult.coff matmult
+
+consoleIO_test1.o: consoleIO_test1.c
+	$(CC) $(CFLAGS) -c consoleIO_test1.c
+consoleIO_test1: consoleIO_test1.o start.o
+	$(LD) $(LDFLAGS) start.o consoleIO_test1.o -o consoleIO_test1.coff
+	$(COFF2NOFF) consoleIO_test1.coff consoleIO_test1
+
+consoleIO_test2.o: consoleIO_test2.c
+	$(CC) $(CFLAGS) -c consoleIO_test2.c
+consoleIO_test2: consoleIO_test2.o start.o
+	$(LD) $(LDFLAGS) start.o consoleIO_test2.o -o consoleIO_test2.coff
+	$(COFF2NOFF) consoleIO_test2.coff consoleIO_test2
+	
+consoleIO_test3.o: consoleIO_test3.c
+	$(CC) $(CFLAGS) -c consoleIO_test3.c
+consoleIO_test3: consoleIO_test3.o start.o
+	$(LD) $(LDFLAGS) start.o consoleIO_test3.o -o consoleIO_test3.coff
+	$(COFF2NOFF) consoleIO_test3.coff consoleIO_test3
+
+fileIO_test1.o: fileIO_test1.c
+	$(CC) $(CFLAGS) -c fileIO_test1.c
+fileIO_test1: fileIO_test1.o start.o
+	$(LD) $(LDFLAGS) start.o fileIO_test1.o -o fileIO_test1.coff
+	$(COFF2NOFF) fileIO_test1.coff fileIO_test1
+	
+fileIO_test2.o: fileIO_test2.c
+	$(CC) $(CFLAGS) -c fileIO_test2.c
+fileIO_test2: fileIO_test2.o start.o
+	$(LD) $(LDFLAGS) start.o fileIO_test2.o -o fileIO_test2.coff
+	$(COFF2NOFF) fileIO_test2.coff fileIO_test2
+
+
+createFile.o: createFile.c
+	$(CC) $(CFLAGS) -c createFile.c
+createFile: createFile.o start.o
+	$(LD) $(LDFLAGS) start.o createFile.o -o createFile.coff
+	$(COFF2NOFF) createFile.coff createFile
+
+test1.o: test1.c
+	$(CC) $(CFLAGS) -c test1.c
+test1: test1.o start.o
+	$(LD) $(LDFLAGS) start.o test1.o -o test1.coff
+	$(COFF2NOFF) test1.coff test1
 
 clean:
 	$(RM) -f *.o *.ii

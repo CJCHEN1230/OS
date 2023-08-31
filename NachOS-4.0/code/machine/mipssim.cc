@@ -70,6 +70,7 @@ Machine::Run()
 		
 	DEBUG(dbgTraCode, "In Machine::Run(), into OneTick " << "== Tick " << kernel->stats->totalTicks << " ==");
 	kernel->interrupt->OneTick();
+	//cout<<"\n In Run!!!";
 	DEBUG(dbgTraCode, "In Machine::Run(), return from OneTick " << "== Tick " << kernel->stats->totalTicks << " ==");
 	if (singleStep && (runUntilTime <= kernel->stats->totalTicks))
 		Debugger();

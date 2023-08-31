@@ -161,6 +161,7 @@ Interrupt::OneTick()
     DEBUG(dbgInt, "== Tick " << stats->totalTicks << " ==");
 
 // check any pending interrupts are now ready to fire
+//檢查是否有任何interrupt準備被trigger
     ChangeLevel(IntOn, IntOff);	// first, turn off interrupts
 				// (interrupt handlers run with
 				// interrupts disabled)
